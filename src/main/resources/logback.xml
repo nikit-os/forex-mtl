@@ -10,5 +10,7 @@
     </root>
 
     <logger name="http4s"/>
+    <logger name="org.asynchttpclient" level="INFO"/>
+    <logger name="scalacache.caffeine" level="INFO"/>
   </configuration>
 

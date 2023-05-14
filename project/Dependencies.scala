@@ -9,6 +9,8 @@ object Dependencies {
     val http4s              = "0.21.22"
     val circe               = "0.13.0"
     val pureConfig          = "0.14.1"
+    val sttp                = "3.5.2"
+    val scalacache          = "0.28.0"
 
     val kindProjector       = "0.10.3"
     val logback             = "1.2.3"
@@ -20,6 +22,8 @@ object Dependencies {
   object Libraries {
     def circe(artifact: String): ModuleID = "io.circe"    %% artifact % Versions.circe
     def http4s(artifact: String): ModuleID = "org.http4s" %% artifact % Versions.http4s
+    def sttp(artifact: String): ModuleID = "com.softwaremill.sttp.client3" %% artifact % Versions.sttp
+    def scalacache(artifact: String): ModuleID = "com.github.cb372" %% artifact % Versions.scalacache
 
     lazy val cats                = "org.typelevel"         %% "cats-core"                  % Versions.cats
     lazy val catsEffect          = "org.typelevel"         %% "cats-effect"                % Versions.catsEffect
@@ -32,7 +36,15 @@ object Dependencies {
     lazy val circeGeneric        = circe("circe-generic")
     lazy val circeGenericExt     = circe("circe-generic-extras")
     lazy val circeParser         = circe("circe-parser")
+    lazy val sttpCore            = sttp("core")
+    lazy val sttpCatsClient      = sttp("async-http-client-backend-cats-ce2")
+    lazy val sttpCirce           = sttp("circe")
     lazy val pureConfig          = "com.github.pureconfig" %% "pureconfig"                 % Versions.pureConfig
+    lazy val scalacacheCore      = scalacache("scalacache-core")
+    lazy val scalacacheCaffeine  = scalacache("scalacache-caffeine")
+    lazy val scalacacheCats      = scalacache("scalacache-cats-effect")
+    lazy val scalacacheCirce      = scalacache("scalacache-circe")
+    lazy val scalaLogging      = "com.typesafe.scala-logging" %% "scala-logging" % "3.9.4"
 
     // Compiler plugins
     lazy val kindProjector       = "org.typelevel"         %% "kind-projector"             % Versions.kindProjector

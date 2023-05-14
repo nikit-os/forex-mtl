@@ -10,5 +10,7 @@ object Rate {
   final case class Pair(
       from: Currency,
       to: Currency
-  )
+  ) {
+    override def toString: String = s"$from$to"
+  }
 }

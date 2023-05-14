@@ -27,6 +27,8 @@ object Currency {
     case USD => "USD"
   }
 
+  implicit val stringToCurrency: String => Currency = fromString
+
   def fromString(s: String): Currency = s.toUpperCase match {
     case "AUD" => AUD
     case "CAD" => CAD
