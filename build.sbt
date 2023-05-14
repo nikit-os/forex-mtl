@@ -49,6 +49,30 @@ scalacOptions ++= Seq(
 resolvers +=
   "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
 
+enablePlugins(DockerPlugin)
+
+assembly / mainClass := Some("forex.Main")
+assembly / assemblyJarName := "forex-mtl.jar"
+
+assemblyMergeStrategy := {
+  case x if x.contains("io.netty.versions.properties") => MergeStrategy.first
+  case x =>
+    val oldStrategy = (ThisBuild / assemblyMergeStrategy).value
+    oldStrategy(x)
+}
+
+docker / dockerfile := {
+  // The assembly task generates a fat JAR file
+  val artifact: File = assembly.value
+  val artifactTargetPath = s"/app/${artifact.name}"
+
+  new Dockerfile {
+    from("openjdk:8-jre")
+    add(artifact, artifactTargetPath)
+    entryPoint("java", "-jar", artifactTargetPath)
+  }
+}
+
 libraryDependencies ++= Seq(
   compilerPlugin(Libraries.kindProjector),
   Libraries.cats,
